@@ -1,0 +1,80 @@
+name: 核验并转存交付包
+
+on:
+  workflow_dispatch:
+    inputs:
+      manifest:
+        description: 本次八个交付分卷的临时下载清单
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: transfer-release
+  cancel-in-progress: false
+
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: 下载并核对原交付分卷
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ASSET_MANIFEST: ${{ inputs.manifest }}
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+          import re
+          import subprocess
+          import urllib.parse
+          import urllib.request
+
+          repo = 'qihangzhang-272/OCREver-downloads'
+          tag = 'v2026.11.12-local-models-qa2'
+          assert os.environ['GITHUB_REPOSITORY'] == repo
+          assets = json.loads(os.environ['ASSET_MANIFEST'])
+          expected = {f'{base}.{n:03d}' for base in (
+              'OCREver-windows-amd64-portable.zip', 'OCREver-arm64.dmg'
+          ) for n in range(1, 5)}
+          assert len(assets) == 8 and {a['name'] for a in assets} == expected
+          for asset in assets:
+              print('::add-mask::' + asset['url'], flush=True)
+              source = urllib.parse.urlsplit(asset['url'])
+              assert source.scheme == 'https'
+              assert source.hostname == 'release-assets.githubusercontent.com'
+              assert 0 < asset['bytes'] < 2 * 1024 ** 3
+              assert re.fullmatch(r'sha256:[a-f0-9]{64}', asset['digest'])
+
+          info = json.loads(subprocess.check_output([
+              'gh', 'release', 'view', tag, '--repo', repo, '--json', 'assets'
+          ]))
+          existing = {a['name']: a for a in info['assets']}
+          for asset in assets:
+              name = asset['name']
+              if name in existing:
+                  old = existing[name]
+                  assert old['state'] == 'uploaded'
+                  assert old['size'] == asset['bytes'] and old['digest'] == asset['digest']
+                  print('已核验已有分卷: ' + name, flush=True)
+                  continue
+              path = Path(name)
+              digest = hashlib.sha256()
+              size = 0
+              with urllib.request.urlopen(asset['url'], timeout=120) as response, path.open('wb') as out:
+                  while chunk := response.read(4 * 1024 ** 2):
+                      size += len(chunk)
+                      assert size <= asset['bytes']
+                      digest.update(chunk)
+                      out.write(chunk)
+              assert size == asset['bytes']
+              assert 'sha256:' + digest.hexdigest() == asset['digest']
+              subprocess.run(['gh', 'release', 'upload', tag, str(path), '--repo', repo], check=True)
+              path.unlink()
+              print('已转存并核验: ' + name, flush=True)
+          PY
