@@ -6,28 +6,24 @@
 
 ## 当前版本
 
-**2026.11.12 本地模型版**：新增 SongPanda2.1、LightOnOCR-2-1B，改进版式分割，并提供书架检索、校对保存及导出。
-
-- [打开本版完整下载页](https://github.com/qihangzhang-272/OCREver-downloads/releases/tag/v2026.11.12-local-models-qa2)
-- [下载图文更新指南 PDF](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.12-local-models-qa2/OCREver-Download-Update-Guide.pdf)
+- **Windows 2026.11.18**：[自定义服务更新](https://github.com/qihangzhang-272/OCREver-downloads/releases/tag/v2026.11.18-provider-setup)，可从服务商获取模型列表并测试启用。
+- **Mac 2026.11.12**：[本地模型版](https://github.com/qihangzhang-272/OCREver-downloads/releases/tag/v2026.11.12-local-models-qa2)，本次未更新。
 
 ## Windows 64 位
 
-请下载以下 **五个文件**，放在同一个文件夹，不要改名：
+请下载以下 **三个文件**，放在同一个文件夹，不要改名：
 
 | 文件 | 下载 |
 | --- | --- |
-| OCREver-windows-amd64-portable.zip.001 | [分卷 1](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.12-local-models-qa2/OCREver-windows-amd64-portable.zip.001) |
-| OCREver-windows-amd64-portable.zip.002 | [分卷 2](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.12-local-models-qa2/OCREver-windows-amd64-portable.zip.002) |
-| OCREver-windows-amd64-portable.zip.003 | [分卷 3](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.12-local-models-qa2/OCREver-windows-amd64-portable.zip.003) |
-| OCREver-windows-amd64-portable.zip.004 | [分卷 4](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.12-local-models-qa2/OCREver-windows-amd64-portable.zip.004) |
-| Merge-Windows.cmd | [合并工具](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.12-local-models-qa2/Merge-Windows.cmd) |
+| OCREver-Windows-x64-20261118.zip.001 | [分卷 1](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.18-provider-setup/OCREver-Windows-x64-20261118.zip.001) |
+| OCREver-Windows-x64-20261118.zip.002 | [分卷 2](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.18-provider-setup/OCREver-Windows-x64-20261118.zip.002) |
+| Merge-Windows.cmd | [合并工具](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.18-provider-setup/Merge-Windows.cmd) |
 
 1. 双击 `Merge-Windows.cmd`，等待显示 `SUCCESS`。工具只在本地合并并校验文件。
-2. 完整解压生成的 `OCREver-Windows-x64-20261112.zip`。
+2. 完整解压生成的 `OCREver-Windows-x64-20261118.zip`。
 3. 打开解压后的 `ocrever-gui.exe`，不要删除同级的 `resources`，也不要只复制 EXE。
 
-完整 ZIP 约 **3.83 GB**，建议预留至少 **20 GB** 空间。Windows 界面需要 Microsoft Edge WebView2 运行时。
+完整 ZIP 约 **3.6 GiB**，建议预留至少 **20 GB** 空间。Windows 界面需要 Microsoft Edge WebView2 运行时。
 
 ## Mac M 系列
 
@@ -64,14 +60,14 @@ shasum -a 256 OCREver-arm64.dmg
 - Windows：`%APPDATA%\ocrever`
 - Mac：`~/Library/Application Support/ocrever`
 
-Windows 新版解压到新目录，不与旧版文件混放。确认书架、单页识别、校对保存和导出正常后，再停用旧版。完整步骤见上方图文指南。
+Windows 新版解压到新目录，不与旧版文件混放。确认书架、单页识别、校对保存和导出正常后，再停用旧版。
 
 ## 使用提醒
 
-- 四个分卷是同一个包的四部分，必须全部下载。不要把单个 `.001` 当作完整软件打开。
+- Windows 有两个分卷，Mac 有四个。请下载对应系统的全部分卷，不要只打开 `.001`。
 - 不要下载页面底部的 `Source code (zip)` 或 `Source code (tar.gz)`，它们不是应用包。
 - 安装包含本地模型与运行环境，无需另装 Python。本地正文 OCR 无需平台 API Token；外部 AI 识别、摘要、翻译或复核需要可用的 API Token。
 - CPU 运行大模型可能需要数分钟。复杂版面仍可能出现错字、漏字或顺序问题，需要人工校对。
-- [完整包 SHA256](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.12-local-models-qa2/SHA256.txt)
+- Windows 合并工具会校验新版 ZIP；[旧版及 Mac 校验值](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.12-local-models-qa2/SHA256.txt) 仍可查看。
 
 GitHub 要求单个 Release 文件小于 2 GiB，因此本版采用分卷下载。[GitHub 发布文件说明](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases#storage-and-bandwidth-quotas)
