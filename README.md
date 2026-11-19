@@ -6,7 +6,7 @@
 
 ## 当前版本
 
-- **Windows 2026.11.18**：[自定义服务更新](https://github.com/qihangzhang-272/OCREver-downloads/releases/tag/v2026.11.18-provider-setup)，可从服务商获取模型列表并测试启用。
+- **Windows 2026.11.19**：[自定义服务修正版](https://github.com/qihangzhang-272/OCREver-downloads/releases/tag/v2026.11.19-windows-provider-fixes)，修复旧配置、模型恢复和账号页操作问题。
 - **Mac 2026.11.18**：[自定义服务更新](https://github.com/qihangzhang-272/OCREver-downloads/releases/tag/v2026.11.18-provider-macos)，支持 M 系列和 macOS 14.5 及以上。
 
 ## Windows 64 位
@@ -15,12 +15,12 @@
 
 | 文件 | 下载 |
 | --- | --- |
-| OCREver-Windows-x64-20261118.zip.001 | [分卷 1](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.18-provider-setup/OCREver-Windows-x64-20261118.zip.001) |
-| OCREver-Windows-x64-20261118.zip.002 | [分卷 2](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.18-provider-setup/OCREver-Windows-x64-20261118.zip.002) |
-| Merge-Windows.cmd | [合并工具](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.18-provider-setup/Merge-Windows.cmd) |
+| OCREver-Windows-x64-20261119.zip.001 | [分卷 1](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.19-windows-provider-fixes/OCREver-Windows-x64-20261119.zip.001) |
+| OCREver-Windows-x64-20261119.zip.002 | [分卷 2](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.19-windows-provider-fixes/OCREver-Windows-x64-20261119.zip.002) |
+| Merge-Windows.cmd | [合并工具](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.19-windows-provider-fixes/Merge-Windows.cmd) |
 
 1. 双击 `Merge-Windows.cmd`，等待显示 `SUCCESS`。工具只在本地合并并校验文件。
-2. 完整解压生成的 `OCREver-Windows-x64-20261118.zip`。
+2. 完整解压生成的 `OCREver-Windows-x64-20261119.zip`。
 3. 打开解压后的 `ocrever-gui.exe`，不要删除同级的 `resources`，也不要只复制 EXE。
 
 完整 ZIP 约 **3.6 GiB**，建议预留至少 **20 GB** 空间。Windows 界面需要 Microsoft Edge WebView2 运行时。
