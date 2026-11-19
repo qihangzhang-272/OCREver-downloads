@@ -4,8 +4,12 @@ on:
   workflow_dispatch:
     inputs:
       manifest:
-        description: 本次八个交付分卷的临时下载清单
+        description: 已验收交付分卷的临时下载清单
         required: true
+        type: string
+      release_tag:
+        description: 接收分卷的公开发布标签
+        default: v2026.11.12-local-models-qa2
         type: string
 
 permissions:
@@ -24,6 +28,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ASSET_MANIFEST: ${{ inputs.manifest }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
         run: |
           python3 - <<'PY'
           import hashlib
@@ -36,13 +41,15 @@ jobs:
           import urllib.request
 
           repo = 'qihangzhang-272/OCREver-downloads'
-          tag = 'v2026.11.12-local-models-qa2'
+          tag = os.environ['RELEASE_TAG']
           assert os.environ['GITHUB_REPOSITORY'] == repo
           assets = json.loads(os.environ['ASSET_MANIFEST'])
-          expected = {f'{base}.{n:03d}' for base in (
-              'OCREver-windows-amd64-portable.zip', 'OCREver-arm64.dmg'
-          ) for n in range(1, 5)}
-          assert len(assets) == 8 and {a['name'] for a in assets} == expected
+          bases = {
+              'v2026.11.12-local-models-qa2': ('OCREver-windows-amd64-portable.zip', 'OCREver-arm64.dmg'),
+              'v2026.11.18-provider-macos': ('OCREver-arm64.dmg',),
+          }[tag]
+          expected = {f'{base}.{n:03d}' for base in bases for n in range(1, 5)}
+          assert len(assets) == len(expected) and {a['name'] for a in assets} == expected
           for asset in assets:
               print('::add-mask::' + asset['url'], flush=True)
               source = urllib.parse.urlsplit(asset['url'])
