@@ -7,7 +7,7 @@
 ## 当前版本
 
 - **Windows 2026.11.18**：[自定义服务更新](https://github.com/qihangzhang-272/OCREver-downloads/releases/tag/v2026.11.18-provider-setup)，可从服务商获取模型列表并测试启用。
-- **Mac 2026.11.12**：[本地模型版](https://github.com/qihangzhang-272/OCREver-downloads/releases/tag/v2026.11.12-local-models-qa2)，本次未更新。
+- **Mac 2026.11.18**：[自定义服务更新](https://github.com/qihangzhang-272/OCREver-downloads/releases/tag/v2026.11.18-provider-macos)，支持 M 系列和 macOS 14.5 及以上。
 
 ## Windows 64 位
 
@@ -33,10 +33,10 @@
 
 | 文件 | 下载 |
 | --- | --- |
-| OCREver-arm64.dmg.001 | [分卷 1](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.12-local-models-qa2/OCREver-arm64.dmg.001) |
-| OCREver-arm64.dmg.002 | [分卷 2](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.12-local-models-qa2/OCREver-arm64.dmg.002) |
-| OCREver-arm64.dmg.003 | [分卷 3](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.12-local-models-qa2/OCREver-arm64.dmg.003) |
-| OCREver-arm64.dmg.004 | [分卷 4](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.12-local-models-qa2/OCREver-arm64.dmg.004) |
+| OCREver-arm64.dmg.001 | [分卷 1](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.18-provider-macos/OCREver-arm64.dmg.001) |
+| OCREver-arm64.dmg.002 | [分卷 2](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.18-provider-macos/OCREver-arm64.dmg.002) |
+| OCREver-arm64.dmg.003 | [分卷 3](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.18-provider-macos/OCREver-arm64.dmg.003) |
+| OCREver-arm64.dmg.004 | [分卷 4](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.18-provider-macos/OCREver-arm64.dmg.004) |
 
 在分卷所在文件夹打开终端，合并前先确认没有需要保留的同名 DMG：
 
@@ -45,13 +45,7 @@ cat OCREver-arm64.dmg.001 OCREver-arm64.dmg.002 OCREver-arm64.dmg.003 OCREver-ar
 shasum -a 256 OCREver-arm64.dmg
 ```
 
-完整 DMG 约 **3.96 GB**。SHA256 应为：
-
-```text
-1f97307f1bc7a777d8ea6defb93752008fbd290f9256ce9b433386fbfc794095
-```
-
-一致后打开 DMG，将应用拖入 `Applications`。本包尚未经过 Apple Developer ID 公证，也未完成 macOS 14.5 实机窗口验收；已完成 CI 包内模型推理与最低系统版本检查。遇到系统验证提示请联系交付方，不要关闭系统安全保护。
+对照 [Mac 发布页](https://github.com/qihangzhang-272/OCREver-downloads/releases/tag/v2026.11.18-provider-macos) 上的 SHA256，一致后打开 DMG，将应用拖入 `Applications`。本包未经过 Apple 公证。遇到系统验证提示请联系交付方。
 
 ## 更新前先备份
 
@@ -68,6 +62,6 @@ Windows 新版解压到新目录，不与旧版文件混放。确认书架、单
 - 不要下载页面底部的 `Source code (zip)` 或 `Source code (tar.gz)`，它们不是应用包。
 - 安装包含本地模型与运行环境，无需另装 Python。本地正文 OCR 无需平台 API Token；外部 AI 识别、摘要、翻译或复核需要可用的 API Token。
 - CPU 运行大模型可能需要数分钟。复杂版面仍可能出现错字、漏字或顺序问题，需要人工校对。
-- Windows 合并工具会校验新版 ZIP；[旧版及 Mac 校验值](https://github.com/qihangzhang-272/OCREver-downloads/releases/download/v2026.11.12-local-models-qa2/SHA256.txt) 仍可查看。
+- Windows 合并工具会校验新版 ZIP；Mac 的校验值见对应发布页。[旧版下载](https://github.com/qihangzhang-272/OCREver-downloads/releases/tag/v2026.11.12-local-models-qa2)仍可使用。
 
 GitHub 要求单个 Release 文件小于 2 GiB，因此本版采用分卷下载。[GitHub 发布文件说明](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases#storage-and-bandwidth-quotas)
